@@ -1,0 +1,96 @@
+<div class="container">
+     <div>
+       <h2>Modifier une Oeuvre :</h2>
+     </div>
+          <form *ngIf="currentOeuvre" >
+<div class="col-sm-2 col-md-2 col-lg-2">
+                <label >ID  Oeuvre</label>
+                <input readonly type="text" [(ngModel)]="currentOeuvre.idOeuvre" name="idOeuvre" class="form-control">
+               </div>
+
+              <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label >Titre Oeuvre</label>
+                <input  type="text"[(ngModel)]= "currentOeuvre.titre"
+                    name="titreOeuvre" class="form-control">
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label >Artiste d'Oeuvre</label>
+                <input   type="text"  [(ngModel)]="currentOeuvre.artiste"
+                    name="ArtisteOeuvre" class="form-control">
+               </div>
+
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                  <label >Date création</label>
+                  <input type="date"  [(ngModel)]= "currentOeuvre.dateCreation"
+                      name="dateCreation" class="form-control">
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label >Catégorie d'Oeuvre</label>
+                <input   type="text"  [(ngModel)]="currentOeuvre.categorie"
+                    name="CategorieOeuvre" class="form-control">
+               </div>
+
+              <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label >Dimensions Oeuvre</label>
+                <input  type="text"[(ngModel)]= "currentOeuvre.dimensions"
+                    name="DimensionsOeuvre" class="form-control">
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label >Description d'Oeuvre</label>
+                <input   type="text"  [(ngModel)]="currentOeuvre.description"
+                    name="DescriptionOeuvre" class="form-control">
+               </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <label >Prix Oeuvre</label>
+                <input type="number"   [(ngModel)]= "currentOeuvre.prix"
+                    name="prixOeuvre" class="form-control">
+              </div>
+              <label >Exposition</label>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+<select class="form-control form-control-lg" id="idExposition" name="idExposition" [(ngModel)]="updatedExpId">
+<option *ngFor="let exp of expositions" [value]="exp.idExposition" >
+{{exp.nom}}
+</option>
+</select>
+</div>
+<div class="col-sm-16 col-md-16 col-lg-16">
+<label class="mb-2">Image :</label>
+<input type="file" (change)="onImageUpload($event)" class="form-control">
+</div>
+
+<div class="mt-2">
+<button type="submit" (click)="onAddImageOeuvre()" class="btn
+btn-success">Ajouter Image</button>
+</div>
+
+
+<div class="col-sm-16 col-md-16 col-lg-16">
+<img [src]="myImage" class="card-img-top img-fluid rounded-start"
+style="width: 500px; height: 300px" />
+</div>
+
+<div class="card shadow mb-4">
+<div class="card-body">
+<table class="table table-striped">
+<thead>
+<tr> <th>Images</th> </tr>
+</thead>
+<tbody *ngFor="let img of currentOeuvre.images">
+<tr>
+<td><img class="card-img-top img-responsive"
+src = "{{'data:' + img.type + ';base64,' + img.image}}"
+style = "height :50px;width:100px"></td>
+
+<td style="width:20%" ><a class="btn btn-danger"
+(click)="supprimerImage(img)">Supprimer</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+               <div class="mt-2">
+<button type="submit"  (click)="updateOeuvre()" class="btn btn-success">Modifer</button>
+               </div>
+          </form>
+</div>
