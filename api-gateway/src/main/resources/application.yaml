@@ -1,0 +1,26 @@
+server:
+  port: 9000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8999/eureka
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: oeuvres-service-route
+          uri: lb://OEUVRES
+          predicates:
+            - Path=/oeuvres/**
+
+        - id: user-service-route
+          uri: lb://USER-MICROSERVICE
+          predicates:
+            - Path=/users/**
+
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
